@@ -2,6 +2,15 @@
 
 [English](README.md) | Português
 
+> **Início rápido**
+
+```bash
+dotnet build
+dotnet run --project src/FreteResiliente --no-build
+```
+
+Precisa só do SDK do .NET 10. Detalhes em [Executar](#executar).
+
 Exemplo executável em .NET 10 que mostra a diferença entre dois conceitos frequentemente confundidos:
 
 - **Tolerância a falhas**: o sistema continua funcionando quando um componente falha, idealmente sem que o usuário perceba. Mecanismo aqui: **redundância** (um balanceador que faz failover para outra instância).
@@ -30,6 +39,33 @@ dotnet run --project src/FreteResiliente --no-build
 ```
 
 Não são necessários serviços externos: as instâncias do serviço de frete são simuladas em memória (`InstanciaSimulada`), cada uma com um roteiro que define o comportamento a cada chamada (ok, erro ou lenta).
+
+## Exemplo de saída
+
+```
+== Fault tolerance: instance A down / Tolerância: instância A fora
+Response / Resposta: R$ 24,90 via B in / em 819 ms
+  A: 1 call(s) / chamada(s)
+  B: 1 call(s) / chamada(s)
+
+== Resilience: transient failure / Resiliência: falha transitória
+Response / Resposta: R$ 24,90 via C in / em 251 ms
+  C: 3 call(s) / chamada(s)
+
+== Degradation: all down / Degradação: tudo fora
+Response / Resposta: R$ 29,90 via tabela-padrao in / em 373 ms
+  D: 4 call(s) / chamada(s)
+
+== Circuit open: does not even try / Circuito aberto: nem tenta
+Response / Resposta: R$ 29,90 via tabela-padrao in / em 8 ms
+  D: 4 call(s) / chamada(s)
+
+== Timeout: 1st call hangs / Timeout: 1ª chamada trava
+Response / Resposta: R$ 24,90 via E in / em 490 ms
+  E: 2 call(s) / chamada(s)
+```
+
+Os tempos variam a cada execução, e o formato da moeda (`R$ 24,90` ou `R$ 24.90`) segue a cultura da sua máquina.
 
 ## O que a saída mostra
 

@@ -1,7 +1,9 @@
 namespace FreteResiliente;
 
-// TOLERÂNCIA A FALHAS: redundância. Se uma instância falha,
-// a requisição vai para a próxima e o chamador nem percebe.
+// EN: FAULT TOLERANCE: redundancy. If one instance fails,
+// EN: the request goes to the next one and the caller never notices.
+// PT: TOLERÂNCIA A FALHAS: redundância. Se uma instância falha,
+// PT: a requisição vai para a próxima e o chamador nem percebe.
 public class BalanceadorHandler(
     IReadOnlyList<HttpMessageHandler> instancias)
     : HttpMessageHandler

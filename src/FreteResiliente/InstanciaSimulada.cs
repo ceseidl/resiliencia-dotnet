@@ -5,8 +5,10 @@ namespace FreteResiliente;
 
 public enum Comportamento { Ok, Erro, Lenta }
 
-// Simula uma instância do serviço de frete. O roteiro diz como
-// ela se comporta a cada chamada (1ª, 2ª, 3ª...).
+// EN: Simulates an instance of the freight service. The script says how
+// EN: it behaves on each call (1st, 2nd, 3rd...).
+// PT: Simula uma instância do serviço de frete. O roteiro diz como
+// PT: ela se comporta a cada chamada (1ª, 2ª, 3ª...).
 public class InstanciaSimulada(
     string nome,
     Func<int, Comportamento> roteiro) : HttpMessageHandler

@@ -21,8 +21,10 @@ public class FreteClient(HttpClient http)
             or BrokenCircuitException
             or TimeoutRejectedException)
         {
-            // RESILIÊNCIA: fallback. Funciona degradado
-            // (frete padrão) em vez de derrubar o pedido.
+            // EN: RESILIENCE: fallback. Works in a degraded mode
+            // EN: (default freight) instead of failing the order.
+            // PT: RESILIÊNCIA: fallback. Funciona degradado
+            // PT: (frete padrão) em vez de derrubar o pedido.
             return TabelaPadrao;
         }
     }

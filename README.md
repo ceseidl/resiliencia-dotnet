@@ -2,6 +2,15 @@
 
 English | [Português](README.pt-BR.md)
 
+> **Quick start**
+
+```bash
+dotnet build
+dotnet run --project src/FreteResiliente --no-build
+```
+
+Needs only the .NET 10 SDK. Details in [Run](#run).
+
 A runnable .NET 10 example that shows the difference between two concepts that are often confused:
 
 - **Fault tolerance**: the system keeps working when a component fails, ideally without the user noticing. Mechanism here: **redundancy** (a load balancer that fails over to another instance).
@@ -30,6 +39,33 @@ dotnet run --project src/FreteResiliente --no-build
 ```
 
 No external services are needed: the freight service instances are simulated in-process (`InstanciaSimulada`), each with a script that says how it behaves on every call (ok, error or slow).
+
+## Example output
+
+```
+== Fault tolerance: instance A down / Tolerância: instância A fora
+Response / Resposta: R$ 24,90 via B in / em 819 ms
+  A: 1 call(s) / chamada(s)
+  B: 1 call(s) / chamada(s)
+
+== Resilience: transient failure / Resiliência: falha transitória
+Response / Resposta: R$ 24,90 via C in / em 251 ms
+  C: 3 call(s) / chamada(s)
+
+== Degradation: all down / Degradação: tudo fora
+Response / Resposta: R$ 29,90 via tabela-padrao in / em 373 ms
+  D: 4 call(s) / chamada(s)
+
+== Circuit open: does not even try / Circuito aberto: nem tenta
+Response / Resposta: R$ 29,90 via tabela-padrao in / em 8 ms
+  D: 4 call(s) / chamada(s)
+
+== Timeout: 1st call hangs / Timeout: 1ª chamada trava
+Response / Resposta: R$ 24,90 via E in / em 490 ms
+  E: 2 call(s) / chamada(s)
+```
+
+Timings vary on each run, and the currency format (`R$ 24,90` or `R$ 24.90`) follows your machine's culture.
 
 ## What the output shows
 
