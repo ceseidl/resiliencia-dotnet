@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build
+        run: dotnet build --nologo
+
+      - name: Smoke test (failover, retry, fallback, circuit breaker, timeout)
+        run: |
+          out=$(dotnet run --project src/FreteResiliente --no-build)
+          echo "$out"
+          echo "$out" | grep -F 'via B'
+          echo "$out" | grep -F 'C: 3 call(s)'
+          echo "$out" | grep -F 'D: 4 call(s)'
+          test "$(echo "$out" | grep -c 'via tabela-padrao')" -eq 2
+          echo "$out" | grep -F 'E: 2 call(s)'

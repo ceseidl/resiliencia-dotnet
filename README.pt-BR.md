@@ -2,6 +2,8 @@
 
 [English](README.md) | Português
 
+[![CI](https://github.com/ceseidl/resiliencia-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/ceseidl/resiliencia-dotnet/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 > **Início rápido**
 
 ```bash
@@ -103,3 +105,7 @@ src/FreteResiliente/
 
 - [Resiliência em HTTP no .NET (Microsoft Learn)](https://learn.microsoft.com/dotnet/core/resilience/http-resilience)
 - [Documentação do Polly](https://www.pollydocs.org)
+
+## Licença
+
+[MIT](LICENSE). Autor: Carlos Eduardo Seidl.
