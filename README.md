@@ -1,5 +1,7 @@
 # Fault Tolerance vs Resilience in .NET
 
+Full article: <https://ceseidl.com.br/en/artigos/resiliencia-dotnet/>
+
 English | [Português](README.pt-BR.md)
 
 [![CI](https://github.com/ceseidl/resiliencia-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/ceseidl/resiliencia-dotnet/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
